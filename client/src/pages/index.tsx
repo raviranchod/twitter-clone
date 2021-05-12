@@ -1,5 +1,6 @@
 import Head from "next/head";
 
+import { Button } from "../components/Button";
 import { Heading } from "../components/Heading";
 import { PanelLayout } from "../layouts/PanelLayout";
 import { Text } from "../components/Text";
@@ -15,6 +16,12 @@ const Home = () => {
       <PanelLayout>
         <Heading className="text-2xl font-bold mb-2">Happening now</Heading>
         <Text className="font-bold mb-8">Join Twitter today</Text>
+        <Button variant="solid" isFullWidth className="mb-4" href="/signup">
+          Sign up
+        </Button>
+        <Button variant="outline" isFullWidth href="/login">
+          Log in
+        </Button>
       </PanelLayout>
     </>
   );
