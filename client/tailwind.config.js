@@ -14,8 +14,12 @@ module.exports = {
       transparent: "transparent",
 
       //
-      primary: "#1da1f2",
-      cloudy: "#ebf6fe",
+      primary: {
+        lightest: "#ebf6fe",
+        light: "#77c7f7",
+        DEFAULT: "#1da1f2",
+        dark: "#0b7cc1",
+      },
     },
     extend: {},
   },
