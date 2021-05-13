@@ -1,3 +1,4 @@
+import { Logo } from "../components/Logo";
 import { Panel } from "../components/Panel";
 
 type PanelLayout = {
@@ -5,12 +6,15 @@ type PanelLayout = {
 };
 
 const PanelLayout = ({ children }: PanelLayout) => (
-  <div className="grid w-full h-full">
+  <main className="grid w-full h-full">
     <div className="hidden sm:flex"></div>
     <div className="max-w-md w-full mx-auto">
-      <Panel>{children}</Panel>
+      <Panel>
+        <Logo className="mb-4" />
+        {children}
+      </Panel>
     </div>
-  </div>
+  </main>
 );
 
 export { PanelLayout };
