@@ -2,7 +2,7 @@ import LogoSvg from "../assets/logo.svg";
 
 type LogoProps = {
   className?: string;
-  height: "sm" | "md" | "lg";
+  height?: "sm" | "md" | "lg";
 };
 
 const Logo = ({ className, height = "md" }: LogoProps) => {
