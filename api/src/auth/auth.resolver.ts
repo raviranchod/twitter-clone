@@ -2,13 +2,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { User } from '../users/user.entity';
 import { UsersService } from 'src/users/users.service';
-import { SignupDto } from './auth.dto';
-import { UserResponse, UniqueFieldError } from './auth.types';
+import { LoginDto, SignupDto } from './auth.dto';
+import {
+  SignupResponse,
+  SignupFieldError,
+  LoginResponse,
+  LoginFieldError,
+} from './auth.types';
 
-type FieldErrors = {
-  field: string;
-  message: string;
-}[];
 @Resolver(() => User)
 export class AuthResolver {
   constructor(
@@ -16,11 +17,11 @@ export class AuthResolver {
     private authService: AuthService,
   ) {}
 
-  @Mutation(() => UserResponse)
-  async signup(@Args('user') signupDto: SignupDto): Promise<UserResponse> {
+  @Mutation(() => SignupResponse)
+  async signup(@Args('user') signupDto: SignupDto): Promise<SignupResponse> {
     const { name, email, username, password } = signupDto;
 
-    let fieldErrors: UniqueFieldError[] = [];
+    let fieldErrors: SignupFieldError[] = [];
 
     if (!name) {
       fieldErrors = [
@@ -57,23 +58,20 @@ export class AuthResolver {
 
     const userByEmail = await this.usersService.findOneByEmail(email);
     if (userByEmail) {
-      fieldErrors = [
-        ...fieldErrors,
-        { field: 'email', message: 'Email has already been taken.' },
-      ];
+      return {
+        errors: [
+          ...fieldErrors,
+          { field: 'email', message: 'Email has already been taken.' },
+        ],
+      };
     }
 
     const userByUsername = await this.usersService.findOneByUsername(username);
     if (userByUsername) {
-      fieldErrors = [
-        ...fieldErrors,
-        { field: 'username', message: 'Username has already been taken.' },
-      ];
-    }
-
-    if (fieldErrors && fieldErrors.length) {
       return {
-        errors: fieldErrors,
+        errors: [
+          { field: 'username', message: 'Username has already been taken.' },
+        ],
       };
     }
 
@@ -89,6 +87,65 @@ export class AuthResolver {
 
     return {
       user: createdUser,
+    };
+  }
+
+  @Mutation(() => LoginResponse)
+  async login(@Args('user') loginDto: LoginDto): Promise<LoginResponse> {
+    const { username, password } = loginDto;
+
+    let fieldErrors: LoginFieldError[] = [];
+
+    if (!username) {
+      fieldErrors = [
+        ...fieldErrors,
+        { field: 'username', message: 'Username is required.' },
+      ];
+    }
+    if (!password) {
+      fieldErrors = [
+        ...fieldErrors,
+        { field: 'password', message: 'Password is required.' },
+      ];
+    }
+
+    if (fieldErrors && fieldErrors.length) {
+      return {
+        errors: fieldErrors,
+      };
+    }
+
+    const userByUsername = await this.usersService.findOneByUsername(username);
+    if (!userByUsername) {
+      return {
+        errors: [
+          {
+            field: '',
+            message:
+              'The email and password that you entered did not match our records. Please double-check and try again.',
+          },
+        ],
+      };
+    }
+
+    const verifiedUser = await this.authService.verifyPassword(
+      userByUsername.password,
+      password,
+    );
+    if (!verifiedUser) {
+      return {
+        errors: [
+          {
+            field: '',
+            message:
+              'The email and password that you entered did not match our records. Please double-check and try again.',
+          },
+        ],
+      };
+    }
+
+    return {
+      user: userByUsername,
     };
   }
 }

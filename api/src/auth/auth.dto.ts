@@ -14,3 +14,12 @@ export class SignupDto {
   @Field()
   password: string;
 }
+
+@InputType()
+export class LoginDto {
+  @Field()
+  username: string;
+
+  @Field()
+  password: string;
+}
