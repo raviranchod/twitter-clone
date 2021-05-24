@@ -1,3 +1,4 @@
+import { Link } from "../components/Link";
 import { Logo } from "../components/Logo";
 import { Panel } from "../components/Panel";
 
@@ -10,7 +11,9 @@ const PanelLayout = ({ children }: PanelLayout) => (
     <div className="hidden sm:flex"></div>
     <div className="max-w-md w-full mx-auto">
       <Panel>
-        <Logo className="mb-4" />
+        <Link href="/" className="block">
+          <Logo className="mb-4" />
+        </Link>
         {children}
       </Panel>
     </div>

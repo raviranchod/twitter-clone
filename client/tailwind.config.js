@@ -20,6 +20,11 @@ module.exports = {
         DEFAULT: "#1da1f2",
         dark: "#0b7cc1",
       },
+      red: {
+        DEFAULT: "#f88787",
+        dark: "#f12a28",
+      },
+      cloudy: "#d8d8d8",
     },
     extend: {},
   },

@@ -1,14 +1,18 @@
+import { forwardRef } from "react";
+import { FormError } from "./FormError";
 import { FormLabel } from "./FormLabel";
 import { VisuallyHidden } from "./VisuallyHidden";
 
 type InputProps = {
   className?: string;
+  errors?: string;
   id: string;
   label: string;
   type?: "text" | "password";
 };
 
-const Input = ({ className, id, label, type = "text" }: InputProps) => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const { className, errors, id, label, type = "text", ...rest } = props;
   return (
     <>
       <VisuallyHidden>
@@ -17,13 +21,20 @@ const Input = ({ className, id, label, type = "text" }: InputProps) => {
         </FormLabel>
       </VisuallyHidden>
       <input
-        className={`w-full px-2 py-3 rounded-lg border-cloudy focus:border-primary-light border-solid border-4 focus:outline-none font-bold transition placeholder-black ${className}`}
+        className={`w-full px-2 py-3 rounded-lg ${
+          errors
+            ? "bg-red-light border-red focus:border-red"
+            : "bg-white border-cloudy focus:border-primary-light"
+        } border-solid border-2 focus:outline-none font-bold transition ${className}`}
         type={type}
         placeholder={label}
         id={id}
+        ref={ref}
+        {...rest}
       />
+      <FormError>{errors}</FormError>
     </>
   );
-};
+});
 
 export { Input };
