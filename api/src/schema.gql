@@ -10,6 +10,16 @@ type User {
   password: String!
 }
 
+type UniqueFieldError {
+  field: String!
+  message: String!
+}
+
+type UserResponse {
+  user: User
+  errors: [UniqueFieldError!]
+}
+
 type Query {
   user(user: GetUserDto!): User!
 }
@@ -19,7 +29,7 @@ input GetUserDto {
 }
 
 type Mutation {
-  signup(user: SignupDto!): User!
+  signup(user: SignupDto!): UserResponse!
 }
 
 input SignupDto {
