@@ -6,7 +6,9 @@ type FormErrorProps = {
 };
 
 const FormError = ({ children, className }: FormErrorProps) => (
-  <Text className={`text-sm text-red-dark ${className}`}>{children}</Text>
+  <Text className={`text-sm text-red-dark ${className ?? null}`}>
+    {children}
+  </Text>
 );
 
 export { FormError };

@@ -18,14 +18,37 @@ export type GetUserDto = {
   id: Scalars['ID'];
 };
 
+export type LoginDto = {
+  username: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type LoginFieldError = {
+  __typename?: 'LoginFieldError';
+  field: Scalars['String'];
+  message: Scalars['String'];
+};
+
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  user?: Maybe<User>;
+  errors?: Maybe<Array<LoginFieldError>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
-  signup: UserResponse;
+  signup: SignupResponse;
+  login: LoginResponse;
 };
 
 
 export type MutationSignupArgs = {
   user: SignupDto;
+};
+
+
+export type MutationLoginArgs = {
+  user: LoginDto;
 };
 
 export type Query = {
@@ -45,10 +68,16 @@ export type SignupDto = {
   password: Scalars['String'];
 };
 
-export type UniqueFieldExists = {
-  __typename?: 'UniqueFieldExists';
+export type SignupFieldError = {
+  __typename?: 'SignupFieldError';
   field: Scalars['String'];
   message: Scalars['String'];
+};
+
+export type SignupResponse = {
+  __typename?: 'SignupResponse';
+  user?: Maybe<User>;
+  errors?: Maybe<Array<SignupFieldError>>;
 };
 
 export type User = {
@@ -60,11 +89,25 @@ export type User = {
   password: Scalars['String'];
 };
 
-export type UserResponse = {
-  __typename?: 'UserResponse';
-  user?: Maybe<User>;
-  errors?: Maybe<Array<UniqueFieldExists>>;
-};
+export type LoginMutationVariables = Exact<{
+  username: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type LoginMutation = (
+  { __typename?: 'Mutation' }
+  & { login: (
+    { __typename?: 'LoginResponse' }
+    & { errors?: Maybe<Array<(
+      { __typename?: 'LoginFieldError' }
+      & Pick<LoginFieldError, 'field' | 'message'>
+    )>>, user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'email' | 'username'>
+    )> }
+  ) }
+);
 
 export type SignupMutationVariables = Exact<{
   name: Scalars['String'];
@@ -77,10 +120,10 @@ export type SignupMutationVariables = Exact<{
 export type SignupMutation = (
   { __typename?: 'Mutation' }
   & { signup: (
-    { __typename?: 'UserResponse' }
+    { __typename?: 'SignupResponse' }
     & { errors?: Maybe<Array<(
-      { __typename?: 'UniqueFieldExists' }
-      & Pick<UniqueFieldExists, 'field' | 'message'>
+      { __typename?: 'SignupFieldError' }
+      & Pick<SignupFieldError, 'field' | 'message'>
     )>>, user?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name' | 'email' | 'username'>
@@ -89,6 +132,26 @@ export type SignupMutation = (
 );
 
 
+export const LoginDocument = gql`
+    mutation Login($username: String!, $password: String!) {
+  login(user: {username: $username, password: $password}) {
+    errors {
+      field
+      message
+    }
+    user {
+      id
+      name
+      email
+      username
+    }
+  }
+}
+    `;
+
+export function useLoginMutation() {
+  return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);
+};
 export const SignupDocument = gql`
     mutation Signup($name: String!, $email: String!, $username: String!, $password: String!) {
   signup(
