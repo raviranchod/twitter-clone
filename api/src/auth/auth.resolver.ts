@@ -58,20 +58,23 @@ export class AuthResolver {
 
     const userByEmail = await this.usersService.findOneByEmail(email);
     if (userByEmail) {
-      return {
-        errors: [
-          ...fieldErrors,
-          { field: 'email', message: 'Email has already been taken.' },
-        ],
-      };
+      fieldErrors = [
+        ...fieldErrors,
+        { field: 'email', message: 'Email has already been taken.' },
+      ];
     }
 
     const userByUsername = await this.usersService.findOneByUsername(username);
     if (userByUsername) {
+      fieldErrors = [
+        ...fieldErrors,
+        { field: 'username', message: 'Username has already been taken.' },
+      ];
+    }
+
+    if (fieldErrors && fieldErrors.length) {
       return {
-        errors: [
-          { field: 'username', message: 'Username has already been taken.' },
-        ],
+        errors: fieldErrors,
       };
     }
 
