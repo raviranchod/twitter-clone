@@ -14,6 +14,9 @@ import { join } from 'path';
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      context: ({ req }) => ({
+        request: req,
+      }),
       cors: {
         origin: 'http://localhost:3000',
         credentials: true,

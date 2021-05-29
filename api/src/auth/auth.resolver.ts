@@ -1,7 +1,8 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { User } from '../users/user.entity';
 import { UsersService } from 'src/users/users.service';
+import { PublicRoute } from '../common/decorators/public-route.decorator';
 import { LoginDto, SignupDto } from './auth.dto';
 import {
   SignupResponse,
@@ -17,6 +18,7 @@ export class AuthResolver {
     private authService: AuthService,
   ) {}
 
+  @PublicRoute()
   @Mutation(() => SignupResponse)
   async signup(@Args('user') signupDto: SignupDto): Promise<SignupResponse> {
     const { name, email, username, password } = signupDto;
@@ -94,7 +96,11 @@ export class AuthResolver {
   }
 
   @Mutation(() => LoginResponse)
-  async login(@Args('user') loginDto: LoginDto): Promise<LoginResponse> {
+  @PublicRoute()
+  async login(
+    @Args('user') loginDto: LoginDto,
+    @Context() ctx,
+  ): Promise<LoginResponse> {
     const { username, password } = loginDto;
 
     let fieldErrors: LoginFieldError[] = [];
@@ -146,6 +152,9 @@ export class AuthResolver {
         ],
       };
     }
+
+    ctx.request.session.set('user', { id: userByUsername.id });
+    await ctx.request.session.save();
 
     return {
       user: userByUsername,
