@@ -39,3 +39,13 @@ export class LoginResponse {
   @Field(() => [LoginFieldError], { nullable: true })
   errors?: LoginFieldError[];
 }
+
+// Authorise response
+@ObjectType()
+export class AuthoriseResponse {
+  @Field(() => User, { nullable: true })
+  user?: User;
+
+  @Field(() => String, { nullable: true })
+  error?: string;
+}

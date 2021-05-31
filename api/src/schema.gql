@@ -30,8 +30,14 @@ type LoginResponse {
   errors: [LoginFieldError!]
 }
 
+type AuthoriseResponse {
+  user: User
+  error: String
+}
+
 type Query {
   user(user: GetUserDto!): User!
+  authorise: AuthoriseResponse!
 }
 
 input GetUserDto {

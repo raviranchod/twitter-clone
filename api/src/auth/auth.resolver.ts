@@ -1,4 +1,4 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { User } from '../users/user.entity';
 import { UsersService } from 'src/users/users.service';
@@ -9,6 +9,7 @@ import {
   SignupFieldError,
   LoginResponse,
   LoginFieldError,
+  AuthoriseResponse,
 } from './auth.types';
 
 @Resolver(() => User)
@@ -159,5 +160,26 @@ export class AuthResolver {
     return {
       user: userByUsername,
     };
+  }
+
+  @Query(() => AuthoriseResponse)
+  async authorise(@Context() ctx): Promise<AuthoriseResponse> {
+    const id = ctx.request.session.get('user').id;
+
+    if (!id) {
+      return {
+        error: 'Forbidden resource',
+      };
+    }
+
+    const user = await this.usersService.findOne(id);
+
+    if (!user) {
+      return {
+        error: 'Forbidden resource',
+      };
+    }
+
+    return { user };
   }
 }
