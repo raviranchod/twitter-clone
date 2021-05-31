@@ -1,0 +1,11 @@
+query Authorise {
+  authorise {
+    error
+    user {
+      id
+      name
+      email
+      username
+    }
+  }
+}

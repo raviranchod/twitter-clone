@@ -14,6 +14,12 @@ export type Scalars = {
   Float: number;
 };
 
+export type AuthoriseResponse = {
+  __typename?: 'AuthoriseResponse';
+  user?: Maybe<User>;
+  error?: Maybe<Scalars['String']>;
+};
+
 export type GetUserDto = {
   id: Scalars['ID'];
 };
@@ -54,6 +60,7 @@ export type MutationLoginArgs = {
 export type Query = {
   __typename?: 'Query';
   user: User;
+  authorise: AuthoriseResponse;
 };
 
 
@@ -131,6 +138,21 @@ export type SignupMutation = (
   ) }
 );
 
+export type AuthoriseQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AuthoriseQuery = (
+  { __typename?: 'Query' }
+  & { authorise: (
+    { __typename?: 'AuthoriseResponse' }
+    & Pick<AuthoriseResponse, 'error'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'email' | 'username'>
+    )> }
+  ) }
+);
+
 
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
@@ -173,4 +195,21 @@ export const SignupDocument = gql`
 
 export function useSignupMutation() {
   return Urql.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument);
+};
+export const AuthoriseDocument = gql`
+    query Authorise {
+  authorise {
+    error
+    user {
+      id
+      name
+      email
+      username
+    }
+  }
+}
+    `;
+
+export function useAuthoriseQuery(options: Omit<Urql.UseQueryArgs<AuthoriseQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AuthoriseQuery>({ query: AuthoriseDocument, ...options });
 };

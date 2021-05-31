@@ -3,9 +3,10 @@ import LogoSvg from "../assets/logo.svg";
 type LogoProps = {
   className?: string;
   height?: "sm" | "md" | "lg";
+  stroke?: "primary" | "white";
 };
 
-const Logo = ({ className, height = "md" }: LogoProps) => {
+const Logo = ({ className, height = "md", stroke = "primary" }: LogoProps) => {
   const heightClassName = {
     sm: "h-6",
     md: "h-8",
@@ -13,7 +14,7 @@ const Logo = ({ className, height = "md" }: LogoProps) => {
   };
   return (
     <LogoSvg
-      className={`stroke-current text-primary ${heightClassName[height]} ${className}`}
+      className={`text-${stroke} ${heightClassName[height]} ${className}`}
     />
   );
 };
