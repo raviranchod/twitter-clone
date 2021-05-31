@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
@@ -9,6 +8,7 @@ import { Input } from "../components/Input";
 import { Link } from "../components/Link";
 import { Text } from "../components/Text";
 import { PanelLayout } from "../layouts/PanelLayout";
+
 import { useSignupMutation, SignupDto } from "../generated/graphql";
 
 const Signup = () => {
@@ -20,12 +20,12 @@ const Signup = () => {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<SignupDto>({ mode: "onSubmit" });
+  } = useForm<SignupDto>({ mode: "onSubmit", reValidateMode: "onSubmit" });
 
-  const onSubmit = handleSubmit(async (data) => {
+  const handleOnSubmit = handleSubmit(async (data) => {
     const response = await signup(data);
 
-    response.data?.signup?.errors?.forEach(({ field, message }) => {
+    response.data?.signup.errors?.forEach(({ field, message }) => {
       if (
         field === "name" ||
         field === "email" ||
@@ -41,8 +41,6 @@ const Signup = () => {
     // return message tell the user to try again later
   });
 
-  console.log(errors);
-
   return (
     <>
       <Head title="Sign up for Twitter" />
@@ -51,12 +49,15 @@ const Signup = () => {
           Lets get started <br />
           Sign up to Twitter
         </Heading>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleOnSubmit}>
           <div className="mb-4">
             <Input
               label="Name"
               id="signup-name"
-              {...register("name", { required: true, maxLength: 50 })}
+              {...register("name", {
+                required: true,
+                maxLength: 50,
+              })}
               errors={errors.name?.message}
             />
           </div>
@@ -95,7 +96,9 @@ const Signup = () => {
               label="Password"
               id="signup-password"
               type="password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+              })}
               errors={errors.password?.message}
             />
           </div>
@@ -104,7 +107,6 @@ const Signup = () => {
               onClick={() => false}
               isFullWidth
               type="submit"
-              // isLoading={isLoading}
               className="mb-2"
             >
               Sign up
