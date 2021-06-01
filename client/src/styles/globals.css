@@ -12,4 +12,8 @@
   body {
     @apply h-full;
   }
+
+  body {
+    @apply text-black;
+  }
 }

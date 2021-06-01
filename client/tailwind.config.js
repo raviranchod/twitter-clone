@@ -1,3 +1,5 @@
+// https://github.com/tailwindlabs/tailwindcss/discussions/1077
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   purge: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
@@ -8,7 +10,7 @@ module.exports = {
   theme: {
     colors: {
       // base colours
-      black: "#000000",
+      black: "#1E1515",
       white: "#ffffff",
       current: "currentColor",
       transparent: "transparent",

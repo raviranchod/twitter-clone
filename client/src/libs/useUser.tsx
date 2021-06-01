@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 import { useAuthoriseQuery } from "../generated/graphql";
 
 const useUser = () => {
+  const router = useRouter();
   const [user] = useAuthoriseQuery();
 
   useEffect(() => {
@@ -13,7 +14,7 @@ const useUser = () => {
       !user?.data?.authorise.user &&
       (user.error || user.data?.authorise.error)
     ) {
-      Router.push("/login");
+      router.push("/login");
     }
   }, [user]);
 

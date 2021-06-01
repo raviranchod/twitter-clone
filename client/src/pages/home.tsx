@@ -1,4 +1,5 @@
 import { Loading } from "../components/Loading";
+import { DashboardLayout } from "../layouts/DashboardLayout";
 
 import { useUser } from "../libs/useUser";
 
@@ -9,7 +10,7 @@ const Home = () => {
     return <Loading />;
   }
 
-  return <>Home</>;
+  return <DashboardLayout>Home</DashboardLayout>;
 };
 
 export default Home;

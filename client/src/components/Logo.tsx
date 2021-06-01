@@ -2,20 +2,18 @@ import LogoSvg from "../assets/logo.svg";
 
 type LogoProps = {
   className?: string;
-  height?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg";
   stroke?: "primary" | "white";
 };
 
-const Logo = ({ className, height = "md", stroke = "primary" }: LogoProps) => {
-  const heightClassName = {
+const Logo = ({ className, size = "md", stroke = "primary" }: LogoProps) => {
+  const sizeClassName = {
     sm: "h-6",
     md: "h-8",
     lg: "h-10",
   };
   return (
-    <LogoSvg
-      className={`text-${stroke} ${heightClassName[height]} ${className}`}
-    />
+    <LogoSvg className={`text-${stroke} ${sizeClassName[size]} ${className}`} />
   );
 };
 
