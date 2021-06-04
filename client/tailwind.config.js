@@ -8,6 +8,13 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "776px",
+      xl: null,
+      "2xl": null,
+    },
     colors: {
       // base colours
       black: "#1E1515",
@@ -26,6 +33,7 @@ module.exports = {
         DEFAULT: "#f88787",
         dark: "#f12a28",
       },
+      grey: "#8e8e8e",
       cloudy: "#d8d8d8",
     },
     extend: {},
