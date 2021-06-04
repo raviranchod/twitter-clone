@@ -10,6 +10,11 @@ type User {
   password: String!
 }
 
+type GetUserByUsernameResponse {
+  user: User
+  error: String
+}
+
 type SignupFieldError {
   field: String!
   message: String!
@@ -36,12 +41,12 @@ type AuthoriseResponse {
 }
 
 type Query {
-  user(user: GetUserDto!): User!
+  userByUsername(user: GetUserByUsernameDto!): GetUserByUsernameResponse!
   authorise: AuthoriseResponse!
 }
 
-input GetUserDto {
-  id: ID!
+input GetUserByUsernameDto {
+  username: String!
 }
 
 type Mutation {
