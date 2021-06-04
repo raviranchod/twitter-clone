@@ -1,16 +1,19 @@
+import { useState } from "react";
 import { Sidebar } from "../components/Sidebar";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
 };
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => (
-  <div className="h-full flex">
-    <Sidebar className="fixed overflow-y-auto" />
-    <main className="w-full bg-primary-lightest ml-24 lg:ml-56">
-      {children}
-    </main>
-  </div>
-);
+const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+  return (
+    <div className="h-full flex">
+      <Sidebar className="relative xl:fixed overflow-y-auto right-56 xl:right-auto" />
+      <main className="w-full bg-primary-lightest ml-24 lg:ml-56 pb-12 overflow-x-auto">
+        {children}
+      </main>
+    </div>
+  );
+};
 
 export { DashboardLayout };

@@ -9,7 +9,7 @@ type SidebarProps = {
 const Sidebar = ({ className }: SidebarProps) => (
   <aside className={`h-full w-24 lg:w-56 p-4 lg:p-8 space-y-8 ${className}`}>
     <Link href="/home">
-      <Logo size="sm" />
+      <Logo size="sm" className="mx-auto lg:mx-0" />
     </Link>
     <Navigation />
   </aside>

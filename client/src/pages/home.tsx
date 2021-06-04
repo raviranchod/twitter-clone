@@ -1,3 +1,4 @@
+import { Head } from "../components/Head";
 import { Loading } from "../components/Loading";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 
@@ -10,7 +11,11 @@ const Home = () => {
     return <Loading />;
   }
 
-  return <DashboardLayout>Home</DashboardLayout>;
+  return (
+    <DashboardLayout>
+      <Head title="Home" />
+    </DashboardLayout>
+  );
 };
 
 export default Home;

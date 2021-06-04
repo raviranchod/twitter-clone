@@ -8,9 +8,9 @@ type LogoProps = {
 
 const Logo = ({ className, size = "md", stroke = "primary" }: LogoProps) => {
   const sizeClassName = {
-    sm: "h-6",
-    md: "h-8",
-    lg: "h-10",
+    sm: "w-6",
+    md: "w-8",
+    lg: "w-10",
   };
   return (
     <LogoSvg className={`text-${stroke} ${sizeClassName[size]} ${className}`} />
