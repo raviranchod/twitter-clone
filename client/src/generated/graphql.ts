@@ -20,8 +20,14 @@ export type AuthoriseResponse = {
   error?: Maybe<Scalars['String']>;
 };
 
-export type GetUserDto = {
-  id: Scalars['ID'];
+export type GetUserByUsernameDto = {
+  username: Scalars['String'];
+};
+
+export type GetUserByUsernameResponse = {
+  __typename?: 'GetUserByUsernameResponse';
+  user?: Maybe<User>;
+  error?: Maybe<Scalars['String']>;
 };
 
 export type LoginDto = {
@@ -59,13 +65,13 @@ export type MutationLoginArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  user: User;
+  userByUsername: GetUserByUsernameResponse;
   authorise: AuthoriseResponse;
 };
 
 
-export type QueryUserArgs = {
-  user: GetUserDto;
+export type QueryUserByUsernameArgs = {
+  user: GetUserByUsernameDto;
 };
 
 export type SignupDto = {
@@ -153,6 +159,23 @@ export type AuthoriseQuery = (
   ) }
 );
 
+export type GetUserByUsernameQueryVariables = Exact<{
+  username: Scalars['String'];
+}>;
+
+
+export type GetUserByUsernameQuery = (
+  { __typename?: 'Query' }
+  & { userByUsername: (
+    { __typename?: 'GetUserByUsernameResponse' }
+    & Pick<GetUserByUsernameResponse, 'error'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'email' | 'username'>
+    )> }
+  ) }
+);
+
 
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
@@ -212,4 +235,21 @@ export const AuthoriseDocument = gql`
 
 export function useAuthoriseQuery(options: Omit<Urql.UseQueryArgs<AuthoriseQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<AuthoriseQuery>({ query: AuthoriseDocument, ...options });
+};
+export const GetUserByUsernameDocument = gql`
+    query GetUserByUsername($username: String!) {
+  userByUsername(user: {username: $username}) {
+    user {
+      id
+      name
+      email
+      username
+    }
+    error
+  }
+}
+    `;
+
+export function useGetUserByUsernameQuery(options: Omit<Urql.UseQueryArgs<GetUserByUsernameQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserByUsernameQuery>({ query: GetUserByUsernameDocument, ...options });
 };
