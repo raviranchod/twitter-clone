@@ -1,12 +1,19 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 import { GetUserByUsernameDto } from './users.dto';
-import { GetUserByUsernameResponse } from './users.type';
+import { GetTweetsResponse, GetUserByUsernameResponse } from './users.type';
+import { TweetsService } from '../tweets/tweets.service';
+import { forwardRef, Inject } from '@nestjs/common';
+import { Tweet } from '../tweets/tweet.entity';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    @Inject(forwardRef(() => TweetsService))
+    private tweetsService: TweetsService,
+  ) {}
 
   @Query(() => GetUserByUsernameResponse, { name: 'userByUsername' })
   async getUserByUsername(
@@ -24,6 +31,22 @@ export class UsersResolver {
 
     return {
       user,
+    };
+  }
+
+  @ResolveField('tweets', () => GetTweetsResponse)
+  async getTweets(@Parent() user: User): Promise<GetTweetsResponse> {
+    const { id } = user;
+    const tweets = await this.tweetsService.findAll(id);
+
+    if (!tweets) {
+      return {
+        error: 'No tweets found',
+      };
+    }
+
+    return {
+      tweets,
     };
   }
 }

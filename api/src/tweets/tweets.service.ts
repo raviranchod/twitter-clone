@@ -10,7 +10,14 @@ export class TweetsService {
     private tweetRepository: Repository<Tweet>,
   ) {}
 
-  async save(userId: string, tweet: string) {
+  findAll(userId: string): Promise<Tweet[]> {
+    return this.tweetRepository.find({
+      where: { userId },
+      order: { created_at: 'DESC' },
+    });
+  }
+
+  async save(userId: string, tweet: string): Promise<Tweet> {
     return await this.tweetRepository.save({ userId, tweet });
   }
 }

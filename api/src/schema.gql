@@ -6,7 +6,7 @@ type Tweet {
   id: ID!
   tweet: String!
   userId: String!
-  user: User!
+  user: GetUserResponse!
   created_at: DateTime!
 }
 
@@ -21,10 +21,25 @@ type User {
   email: String!
   username: String!
   password: String!
-  tweets: [Tweet!]
+  tweets: GetTweetsResponse!
 }
 
 type GetUserByUsernameResponse {
+  user: User
+  error: String
+}
+
+type GetTweetsResponse {
+  tweets: [Tweet!]
+  error: String
+}
+
+type ComposeTweetResponse {
+  tweet: Tweet
+  error: String
+}
+
+type GetUserResponse {
   user: User
   error: String
 }
@@ -64,9 +79,14 @@ input GetUserByUsernameDto {
 }
 
 type Mutation {
+  composeTweet(tweet: ComposeTweetDto!): ComposeTweetResponse!
   signup(user: SignupDto!): SignupResponse!
   login(user: LoginDto!): LoginResponse!
-  composeTweet(tweet: ComposeTweetDto!): Tweet!
+}
+
+input ComposeTweetDto {
+  userId: ID!
+  tweet: String!
 }
 
 input SignupDto {
@@ -79,9 +99,4 @@ input SignupDto {
 input LoginDto {
   username: String!
   password: String!
-}
-
-input ComposeTweetDto {
-  userId: ID!
-  tweet: String!
 }
