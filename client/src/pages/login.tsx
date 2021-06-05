@@ -2,16 +2,16 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import { Button } from "../components/Button";
-import { Head } from "../components/Head";
-import { Heading } from "../components/Heading";
-import { Input } from "../components/Input";
-import { Link } from "../components/Link";
+import { Button } from "../features/Button";
+import { Head } from "../features/Head";
+import { Heading } from "../features/Heading";
+import { Input } from "../features/Input";
+import { Link } from "../features/Link";
 import { PanelLayout } from "../layouts/PanelLayout";
-import { Text } from "../components/Text";
+import { Text } from "../features/Text";
 
 import { useLoginMutation, LoginDto } from "../generated/graphql";
-import { ErrorBubble } from "../components/ErrorBubble";
+import { ErrorBubble } from "../features/ErrorBubble";
 
 const Login = () => {
   const [, login] = useLoginMutation();

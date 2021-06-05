@@ -1,4 +1,4 @@
-import { Logo } from "./Logo";
+import { Logo } from "../Logo";
 
 const Loading = () => (
   <div className="bg-primary h-full flex justify-center items-center">

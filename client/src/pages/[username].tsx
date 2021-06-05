@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 
-import { Container } from "../components/Container";
+import { Container } from "../features/Container";
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { Head } from "../components/Head";
-import { HeaderImage } from "../components/HeaderImage";
-import { Panel } from "../components/Panel";
-import { ProfileImage } from "../components/ProfileImage";
-import { Text } from "../components/Text";
+import { Head } from "../features/Head";
+import { HeaderImage } from "../features/HeaderImage";
+import { Panel } from "../features/Panel";
+import { ProfileImage } from "../features/ProfileImage";
+import { Text } from "../features/Text";
 
 import { useGetUserByUsernameQuery } from "../generated/graphql";
-import { Tweet } from "../components/Tweet";
+import { Tweet } from "../features/Tweet";
 
 const Profile = () => {
   const router = useRouter();

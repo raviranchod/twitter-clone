@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 
-import HomeSvg from "../assets/home.svg";
-import { Link } from "./Link";
-import ProfileSvg from "../assets/profile.svg";
-import { Text } from "./Text";
+import HomeSvg from "../../assets/home.svg";
+import { Link } from "../Link";
+import ProfileSvg from "../../assets/profile.svg";
+import { Text } from "../Text";
 
-import { tailwindTheme } from "../utils/tailwindTheme";
-import { useWindowSize } from "../utils/useWindowSize";
-import { VisuallyHidden } from "./VisuallyHidden";
+import { tailwindTheme } from "../../utils/tailwindTheme";
+import { useWindowSize } from "../../utils/useWindowSize";
+import { VisuallyHidden } from "../VisuallyHidden";
 
 const navigationItems = [
   {

@@ -1,6 +1,6 @@
-import { Link } from "./Link";
-import { Logo } from "./Logo";
-import { Navigation } from "./Navigation";
+import { Link } from "../Link";
+import { Logo } from "../Logo";
+import { Navigation } from "../Navigation";
 
 type SidebarProps = {
   className?: string;

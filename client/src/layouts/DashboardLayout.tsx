@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sidebar } from "../components/Sidebar";
+import { Sidebar } from "../features/Sidebar";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;

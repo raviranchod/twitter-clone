@@ -1,5 +1,5 @@
-import { Head } from "../components/Head";
-import { Loading } from "../components/Loading";
+import { Head } from "../features/Head";
+import { Loading } from "../features/Loading";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 
 import { useUser } from "../libs/useUser";

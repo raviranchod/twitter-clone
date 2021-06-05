@@ -1,9 +1,9 @@
-import LikeSvg from "../assets/like.svg";
-import { ProfileImage } from "./ProfileImage";
-import ReplySvg from "../assets/reply.svg";
-import RetweetSvg from "../assets/retweet.svg";
-import { Text } from "./Text";
-import { Link } from "./Link";
+import LikeSvg from "../../assets/like.svg";
+import { ProfileImage } from "../ProfileImage";
+import ReplySvg from "../../assets/reply.svg";
+import RetweetSvg from "../../assets/retweet.svg";
+import { Text } from "../Text";
+import { Link } from "../Link";
 
 type TweetProps = {
   className?: string;

@@ -1,8 +1,8 @@
-import { Button } from "../components/Button";
-import { Heading } from "../components/Heading";
-import { Head } from "../components/Head";
+import { Button } from "../features/Button";
+import { Heading } from "../features/Heading";
+import { Head } from "../features/Head";
 import { PanelLayout } from "../layouts/PanelLayout";
-import { Text } from "../components/Text";
+import { Text } from "../features/Text";
 
 const Landing = () => {
   return (
