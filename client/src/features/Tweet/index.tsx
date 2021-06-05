@@ -8,9 +8,9 @@ import { Link } from "../Link";
 type TweetProps = {
   className?: string;
   createdAt: string;
-  imageAlt: string;
-  imageSrc: string;
   name: string;
+  profileImageAlt: string;
+  profileImageSrc: string;
   tweet: string;
   username: string;
 };
@@ -18,19 +18,23 @@ type TweetProps = {
 const Tweet = ({
   className,
   createdAt,
-  imageAlt,
-  imageSrc,
   name,
+  profileImageAlt,
+  profileImageSrc,
   tweet,
   username,
 }: TweetProps) => (
   <div className={`flex space-x-4 ${className}`}>
-    <ProfileImage src={imageSrc} alt={imageAlt} className="self-start" />
+    <ProfileImage
+      src={profileImageSrc}
+      alt={profileImageAlt}
+      className="self-start"
+    />
     <div className="w-full overflow-hidden">
-      <div className="space-x-2 flex">
+      <div className="flex space-x-2">
         <Link
           href={`/${username}`}
-          className="space-x-2 flex flex-shrink overflow-hidden"
+          className="flex flex-shrink space-x-2 overflow-hidden"
         >
           <Text
             as="span"
@@ -50,7 +54,7 @@ const Tweet = ({
         </div>
       </div>
       <Text className="mb-4">{tweet}</Text>
-      <div className="flex justify-between mr-16">
+      <div className="flex justify-between md:mr-16">
         <ReplySvg className="w-6 text-current text-grey hover:text-primary-light transition-colors cursor-not-allowed" />
         <RetweetSvg className="w-6 text-current text-grey hover:text-primary-light transition-colors cursor-not-allowed" />
         <LikeSvg className="w-6 text-current text-grey hover:text-red transition-colors cursor-not-allowed" />

@@ -32,11 +32,13 @@ const Navigation = () => {
       icon: ProfileSvg,
     },
   ];
+
+  console.log(router);
   return (
     <ul className="space-y-8">
       {navigationItems.map((item) => {
         const Icon = item.icon;
-        const isCurrentRoute = router.pathname === item.href;
+        const isCurrentRoute = router.asPath === item.href;
         return (
           <li key={`navigation-${item.title}`}>
             <Link
@@ -46,7 +48,7 @@ const Navigation = () => {
               }`}
             >
               <Icon className="w-6 mx-auto lg:mx-0" />
-              {windowSize.width && windowSize.width > largeBreakpoint ? (
+              {windowSize.width && windowSize.width >= largeBreakpoint ? (
                 <Text as="span" className="ml-4">
                   {item.title}
                 </Text>

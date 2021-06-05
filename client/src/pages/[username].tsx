@@ -8,23 +8,25 @@ import { Loading } from "../features/Loading";
 import { Panel } from "../features/Panel";
 import { ProfileImage } from "../features/ProfileImage";
 import { Text } from "../features/Text";
-import { Tweet } from "../features/Tweet";
 
 import { useGetUserByUsernameQuery } from "../generated/graphql";
 import { useUser } from "../libs/useUser";
 
+import { Tweet } from "../features/Tweet";
+
 const Profile = () => {
   const { isLoading } = useUser();
 
-  if (isLoading) {
-    return <Loading />;
-  }
   const router = useRouter();
   const username = router.query.username as string;
 
   const [userByUsername] = useGetUserByUsernameQuery({
     variables: { username },
   });
+
+  if (isLoading && !username && !userByUsername) {
+    return <Loading />;
+  }
 
   const user = userByUsername.data?.userByUsername.user;
 
@@ -50,8 +52,8 @@ const Profile = () => {
             name="Ravi Ranchod"
             username="rav"
             tweet="lang buddha"
-            imageSrc="https://picsum.photos/200/200"
-            imageAlt="rav"
+            profileImageSrc="https://picsum.photos/200/200"
+            profileImageAlt="rav"
           />
         </Panel>
       </Container>

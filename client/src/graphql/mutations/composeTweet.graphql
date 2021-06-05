@@ -1,0 +1,8 @@
+mutation ComposeTweet($userId: ID!, $tweet: String!) {
+  composeTweet(tweet: { userId: $userId, tweet: $tweet }) {
+    id
+    tweet
+    userId
+    created_at
+  }
+}

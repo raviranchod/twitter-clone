@@ -12,7 +12,7 @@ const ProfileImage = ({
   size = "md",
 }: ProfileImageProps) => {
   const sizeClassName = {
-    sm: "w-10",
+    sm: "w-6",
     md: "w-14",
     lg: "w-28",
   };

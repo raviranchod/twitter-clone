@@ -12,6 +12,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: any;
 };
 
 export type AuthoriseResponse = {
@@ -19,6 +21,12 @@ export type AuthoriseResponse = {
   user?: Maybe<User>;
   error?: Maybe<Scalars['String']>;
 };
+
+export type ComposeTweetDto = {
+  userId: Scalars['ID'];
+  tweet: Scalars['String'];
+};
+
 
 export type GetUserByUsernameDto = {
   username: Scalars['String'];
@@ -51,6 +59,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   signup: SignupResponse;
   login: LoginResponse;
+  composeTweet: Tweet;
 };
 
 
@@ -61,6 +70,11 @@ export type MutationSignupArgs = {
 
 export type MutationLoginArgs = {
   user: LoginDto;
+};
+
+
+export type MutationComposeTweetArgs = {
+  tweet: ComposeTweetDto;
 };
 
 export type Query = {
@@ -93,6 +107,15 @@ export type SignupResponse = {
   errors?: Maybe<Array<SignupFieldError>>;
 };
 
+export type Tweet = {
+  __typename?: 'Tweet';
+  id: Scalars['ID'];
+  tweet: Scalars['String'];
+  userId: Scalars['String'];
+  user: User;
+  created_at: Scalars['DateTime'];
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
@@ -100,7 +123,22 @@ export type User = {
   email: Scalars['String'];
   username: Scalars['String'];
   password: Scalars['String'];
+  tweets?: Maybe<Array<Tweet>>;
 };
+
+export type ComposeTweetMutationVariables = Exact<{
+  userId: Scalars['ID'];
+  tweet: Scalars['String'];
+}>;
+
+
+export type ComposeTweetMutation = (
+  { __typename?: 'Mutation' }
+  & { composeTweet: (
+    { __typename?: 'Tweet' }
+    & Pick<Tweet, 'id' | 'tweet' | 'userId' | 'created_at'>
+  ) }
+);
 
 export type LoginMutationVariables = Exact<{
   username: Scalars['String'];
@@ -177,6 +215,20 @@ export type GetUserByUsernameQuery = (
 );
 
 
+export const ComposeTweetDocument = gql`
+    mutation ComposeTweet($userId: ID!, $tweet: String!) {
+  composeTweet(tweet: {userId: $userId, tweet: $tweet}) {
+    id
+    tweet
+    userId
+    created_at
+  }
+}
+    `;
+
+export function useComposeTweetMutation() {
+  return Urql.useMutation<ComposeTweetMutation, ComposeTweetMutationVariables>(ComposeTweetDocument);
+};
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
   login(user: {username: $username, password: $password}) {
