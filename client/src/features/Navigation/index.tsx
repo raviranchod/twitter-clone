@@ -35,7 +35,7 @@ const Navigation = () => {
 
   console.log(router);
   return (
-    <ul className="space-y-8">
+    <ul className="space-y-2 px-2 lg:px-0">
       {navigationItems.map((item) => {
         const Icon = item.icon;
         const isCurrentRoute = router.asPath === item.href;
@@ -43,7 +43,7 @@ const Navigation = () => {
           <li key={`navigation-${item.title}`}>
             <Link
               href={item.href}
-              className={`flex items-center font-bold ${
+              className={`flex items-center font-bold py-4 lg:px-4 hover:bg-primary-lightest rounded-lg  ${
                 isCurrentRoute && "text-primary"
               }`}
             >

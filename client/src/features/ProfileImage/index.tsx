@@ -12,16 +12,16 @@ const ProfileImage = ({
   size = "md",
 }: ProfileImageProps) => {
   const sizeClassName = {
-    sm: "w-6",
-    md: "w-14",
-    lg: "w-28",
+    sm: "w-6 rounded-md",
+    md: "w-14 rounded-lg",
+    lg: "w-28 rounded-lg",
   };
 
   return (
     <img
       src={src}
       alt={alt}
-      className={`rounded-lg ${sizeClassName[size]} ${className}`}
+      className={`${sizeClassName[size]} ${className}`}
     />
   );
 };
