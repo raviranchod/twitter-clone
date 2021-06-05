@@ -2,12 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Tweet {
+  id: ID!
+  tweet: String!
+  userId: String!
+  user: User!
+  created_at: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: ID!
   name: String!
   email: String!
   username: String!
   password: String!
+  tweets: [Tweet!]
 }
 
 type GetUserByUsernameResponse {
@@ -52,6 +66,7 @@ input GetUserByUsernameDto {
 type Mutation {
   signup(user: SignupDto!): SignupResponse!
   login(user: LoginDto!): LoginResponse!
+  composeTweet(tweet: ComposeTweetDto!): Tweet!
 }
 
 input SignupDto {
@@ -64,4 +79,9 @@ input SignupDto {
 input LoginDto {
   username: String!
   password: String!
+}
+
+input ComposeTweetDto {
+  userId: ID!
+  tweet: String!
 }

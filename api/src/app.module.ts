@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { TweetsModule } from './tweets/tweets.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { join } from 'path';
     }),
     UsersModule,
     AuthModule,
+    TweetsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

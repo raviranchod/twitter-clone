@@ -1,5 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Tweet } from '../tweets/tweet.entity';
+
 @ObjectType()
 @Entity()
 export class User {
@@ -22,4 +24,8 @@ export class User {
   @Field()
   @Column()
   password: string;
+
+  @Field(() => [Tweet], { nullable: true })
+  @OneToMany(() => Tweet, (tweet) => tweet.user)
+  tweets: Tweet[];
 }
