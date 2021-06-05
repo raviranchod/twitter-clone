@@ -5,9 +5,9 @@ import { DashboardLayout } from "../layouts/DashboardLayout";
 import { useUser } from "../libs/useUser";
 
 const Home = () => {
-  const { user } = useUser();
+  const { isLoading } = useUser();
 
-  if (!user.data?.authorise.user) {
+  if (isLoading) {
     return <Loading />;
   }
 

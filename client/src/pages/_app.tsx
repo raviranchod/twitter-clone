@@ -1,6 +1,8 @@
 import { AppProps } from "next/app";
 import "../styles/globals.css";
-import { createClient, Provider } from "urql";
+import { createClient, Provider as UrqlProvider } from "urql";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "../redux/store";
 
 const urqlClient = createClient({
   url: "http://localhost:4000/graphql",
@@ -12,9 +14,11 @@ const urqlClient = createClient({
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <Provider value={urqlClient}>
-      <Component {...pageProps} />
-    </Provider>
+    <ReduxProvider store={store}>
+      <UrqlProvider value={urqlClient}>
+        <Component {...pageProps} />
+      </UrqlProvider>
+    </ReduxProvider>
   );
 };
 

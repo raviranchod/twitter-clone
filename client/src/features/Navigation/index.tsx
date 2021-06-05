@@ -1,26 +1,15 @@
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 import HomeSvg from "../../assets/home.svg";
 import { Link } from "../Link";
 import ProfileSvg from "../../assets/profile.svg";
 import { Text } from "../Text";
-
-import { tailwindTheme } from "../../utils/tailwindTheme";
-import { useWindowSize } from "../../utils/useWindowSize";
 import { VisuallyHidden } from "../VisuallyHidden";
 
-const navigationItems = [
-  {
-    title: "Home",
-    href: "/home",
-    icon: HomeSvg,
-  },
-  {
-    title: "Profile",
-    href: "/profile",
-    icon: ProfileSvg,
-  },
-];
+import { RootState } from "../../redux/store";
+import { tailwindTheme } from "../../utils/tailwindTheme";
+import { useWindowSize } from "../../utils/useWindowSize";
 
 const Navigation = () => {
   const { windowSize } = useWindowSize();
@@ -28,6 +17,21 @@ const Navigation = () => {
   const largeBreakpoint = parseInt(theme.screens.lg);
 
   const router = useRouter();
+
+  const username = useSelector((state: RootState) => state.user.username);
+
+  const navigationItems = [
+    {
+      title: "Home",
+      href: "/home",
+      icon: HomeSvg,
+    },
+    {
+      title: "Profile",
+      href: `/${username}`,
+      icon: ProfileSvg,
+    },
+  ];
   return (
     <ul className="space-y-8">
       {navigationItems.map((item) => {

@@ -4,14 +4,21 @@ import { Container } from "../features/Container";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 import { Head } from "../features/Head";
 import { HeaderImage } from "../features/HeaderImage";
+import { Loading } from "../features/Loading";
 import { Panel } from "../features/Panel";
 import { ProfileImage } from "../features/ProfileImage";
 import { Text } from "../features/Text";
-
-import { useGetUserByUsernameQuery } from "../generated/graphql";
 import { Tweet } from "../features/Tweet";
 
+import { useGetUserByUsernameQuery } from "../generated/graphql";
+import { useUser } from "../libs/useUser";
+
 const Profile = () => {
+  const { isLoading } = useUser();
+
+  if (isLoading) {
+    return <Loading />;
+  }
   const router = useRouter();
   const username = router.query.username as string;
 
