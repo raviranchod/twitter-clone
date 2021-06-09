@@ -30,6 +30,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         placeholder={label}
         id={id}
         ref={ref}
+        autoComplete="off"
         {...rest}
       />
       <FormError>{errors}</FormError>

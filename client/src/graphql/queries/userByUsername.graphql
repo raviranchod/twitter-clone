@@ -1,0 +1,24 @@
+query GetUserByUsername($username: String!) {
+  userByUsername(user: { username: $username }) {
+    user {
+      name
+      username
+      tweets {
+        tweets {
+          id
+          tweet
+          user {
+            user {
+              name
+              username
+            }
+            error
+          }
+          created_at
+        }
+        error
+      }
+    }
+    error
+  }
+}

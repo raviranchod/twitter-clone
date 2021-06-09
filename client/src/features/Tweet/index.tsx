@@ -24,7 +24,7 @@ const Tweet = ({
   tweet,
   username,
 }: TweetProps) => (
-  <div className={`flex space-x-4 ${className}`}>
+  <div className={`flex space-x-4 p-6 lg:p-8 ${className}`}>
     <ProfileImage
       src={profileImageSrc}
       alt={profileImageAlt}

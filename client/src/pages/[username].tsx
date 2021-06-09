@@ -1,20 +1,21 @@
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 import { Container } from "../features/Container";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 import { Head } from "../features/Head";
 import { HeaderImage } from "../features/HeaderImage";
-import { Loading } from "../features/Loading";
+import { LoadingScreen } from "../screens/LoadingScreen";
+import { Logo } from "../features/Logo";
 import { Panel } from "../features/Panel";
 import { ProfileImage } from "../features/ProfileImage";
+import SpinnerSvg from "../assets/spinner.svg";
 import { Text } from "../features/Text";
+
+import { Tweet } from "../features/Tweet";
 
 import { useGetUserByUsernameQuery } from "../generated/graphql";
 import { useUser } from "../libs/useUser";
-
-import { Tweet } from "../features/Tweet";
-import { RootState } from "../redux/store";
 
 const Profile = () => {
   const { isLoading } = useUser();
@@ -26,11 +27,14 @@ const Profile = () => {
     variables: { username },
   });
 
+  const { data, fetching, error } = userByUsername;
+
   if (isLoading && !username && !userByUsername) {
-    return <Loading />;
+    return <LoadingScreen />;
   }
 
-  const user = useSelector((state: RootState) => state.user);
+  const user = data?.userByUsername.user;
+  const tweets = user?.tweets;
 
   return (
     <DashboardLayout>
@@ -48,15 +52,29 @@ const Profile = () => {
           <Text className="text-lg font-bold mt-4">{user?.name}</Text>
           <Text className="text-grey">@{user?.username}</Text>
         </div>
-        <Panel>
-          <Tweet
-            createdAt="9m"
-            name="Ravi Ranchod"
-            username="rav"
-            tweet="lang buddha"
-            profileImageSrc="https://picsum.photos/200/200"
-            profileImageAlt="rav"
-          />
+        <Panel
+          className="divide-y-2 divide-primary-lightest"
+          padding={tweets?.tweets?.length ? "none" : "normal"}
+        >
+          {fetching ? (
+            <SpinnerSvg className="w-8 mx-auto text-current text-primary" />
+          ) : tweets?.tweets?.length ? (
+            tweets.tweets.map((tweet) => (
+              <Tweet
+                createdAt={dayjs().to(dayjs(tweet.created_at))}
+                name={tweet.user.user?.name!}
+                username={tweet.user.user?.username!}
+                tweet={tweet.tweet}
+                profileImageSrc="https://picsum.photos/200/200"
+                profileImageAlt={`${tweet.user.user?.username!} profile image`}
+              />
+            ))
+          ) : (
+            <div className="text-center">
+              <Logo className="mx-auto mb-4" />
+              <Text>@{username} hasn't tweeted yet</Text>
+            </div>
+          )}
         </Panel>
       </Container>
     </DashboardLayout>

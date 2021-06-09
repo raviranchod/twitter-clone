@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
+import ExploreSvg from "../../assets/explore.svg";
 import HomeSvg from "../../assets/home.svg";
 import { Link } from "../Link";
 import ProfileSvg from "../../assets/profile.svg";
@@ -27,13 +28,17 @@ const Navigation = () => {
       icon: HomeSvg,
     },
     {
+      title: "Explore",
+      href: "/explore",
+      icon: ExploreSvg,
+    },
+    {
       title: "Profile",
       href: `/${username}`,
       icon: ProfileSvg,
     },
   ];
 
-  console.log(router);
   return (
     <ul className="space-y-2 px-2 lg:px-0">
       {navigationItems.map((item) => {
