@@ -27,6 +27,18 @@ export type ComposeTweetDto = {
   tweet: Scalars['String'];
 };
 
+export type ComposeTweetResponse = {
+  __typename?: 'ComposeTweetResponse';
+  tweet?: Maybe<Tweet>;
+  error?: Maybe<Scalars['String']>;
+};
+
+
+export type GetTweetsResponse = {
+  __typename?: 'GetTweetsResponse';
+  tweets?: Maybe<Array<Tweet>>;
+  error?: Maybe<Scalars['String']>;
+};
 
 export type GetUserByUsernameDto = {
   username: Scalars['String'];
@@ -34,6 +46,12 @@ export type GetUserByUsernameDto = {
 
 export type GetUserByUsernameResponse = {
   __typename?: 'GetUserByUsernameResponse';
+  user?: Maybe<User>;
+  error?: Maybe<Scalars['String']>;
+};
+
+export type GetUserResponse = {
+  __typename?: 'GetUserResponse';
   user?: Maybe<User>;
   error?: Maybe<Scalars['String']>;
 };
@@ -57,9 +75,14 @@ export type LoginResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  composeTweet: ComposeTweetResponse;
   signup: SignupResponse;
   login: LoginResponse;
-  composeTweet: Tweet;
+};
+
+
+export type MutationComposeTweetArgs = {
+  tweet: ComposeTweetDto;
 };
 
 
@@ -70,11 +93,6 @@ export type MutationSignupArgs = {
 
 export type MutationLoginArgs = {
   user: LoginDto;
-};
-
-
-export type MutationComposeTweetArgs = {
-  tweet: ComposeTweetDto;
 };
 
 export type Query = {
@@ -112,7 +130,7 @@ export type Tweet = {
   id: Scalars['ID'];
   tweet: Scalars['String'];
   userId: Scalars['String'];
-  user: User;
+  user: GetUserResponse;
   created_at: Scalars['DateTime'];
 };
 
@@ -123,7 +141,7 @@ export type User = {
   email: Scalars['String'];
   username: Scalars['String'];
   password: Scalars['String'];
-  tweets?: Maybe<Array<Tweet>>;
+  tweets: GetTweetsResponse;
 };
 
 export type ComposeTweetMutationVariables = Exact<{
@@ -135,8 +153,11 @@ export type ComposeTweetMutationVariables = Exact<{
 export type ComposeTweetMutation = (
   { __typename?: 'Mutation' }
   & { composeTweet: (
-    { __typename?: 'Tweet' }
-    & Pick<Tweet, 'id' | 'tweet' | 'userId' | 'created_at'>
+    { __typename?: 'ComposeTweetResponse' }
+    & { tweet?: Maybe<(
+      { __typename?: 'Tweet' }
+      & Pick<Tweet, 'id' | 'tweet' | 'userId' | 'created_at'>
+    )> }
   ) }
 );
 
@@ -209,7 +230,23 @@ export type GetUserByUsernameQuery = (
     & Pick<GetUserByUsernameResponse, 'error'>
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'email' | 'username'>
+      & Pick<User, 'name' | 'username'>
+      & { tweets: (
+        { __typename?: 'GetTweetsResponse' }
+        & Pick<GetTweetsResponse, 'error'>
+        & { tweets?: Maybe<Array<(
+          { __typename?: 'Tweet' }
+          & Pick<Tweet, 'id' | 'tweet' | 'created_at'>
+          & { user: (
+            { __typename?: 'GetUserResponse' }
+            & Pick<GetUserResponse, 'error'>
+            & { user?: Maybe<(
+              { __typename?: 'User' }
+              & Pick<User, 'name' | 'username'>
+            )> }
+          ) }
+        )>> }
+      ) }
     )> }
   ) }
 );
@@ -218,10 +255,12 @@ export type GetUserByUsernameQuery = (
 export const ComposeTweetDocument = gql`
     mutation ComposeTweet($userId: ID!, $tweet: String!) {
   composeTweet(tweet: {userId: $userId, tweet: $tweet}) {
-    id
-    tweet
-    userId
-    created_at
+    tweet {
+      id
+      tweet
+      userId
+      created_at
+    }
   }
 }
     `;
@@ -292,10 +331,23 @@ export const GetUserByUsernameDocument = gql`
     query GetUserByUsername($username: String!) {
   userByUsername(user: {username: $username}) {
     user {
-      id
       name
-      email
       username
+      tweets {
+        tweets {
+          id
+          tweet
+          user {
+            user {
+              name
+              username
+            }
+            error
+          }
+          created_at
+        }
+        error
+      }
     }
     error
   }

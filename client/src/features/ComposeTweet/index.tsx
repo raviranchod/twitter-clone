@@ -49,9 +49,7 @@ const ComposeTweet = ({
   }, [register]);
 
   const handleOnSubmit = handleSubmit(async ({ tweet }) => {
-    const response = await composeTweet({ userId, tweet });
-
-    console.log(response);
+    await composeTweet({ userId, tweet });
   });
 
   return (
