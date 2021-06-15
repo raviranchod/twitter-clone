@@ -8,7 +8,7 @@ const userSlice = createSlice({
     username: "",
   },
   reducers: {
-    authenticate: (
+    authenticated: (
       state,
       action: PayloadAction<{ id: string; name: string; username: string }>
     ) => {
@@ -16,10 +16,15 @@ const userSlice = createSlice({
       state.name = action.payload.name;
       state.username = action.payload.username;
     },
+    notAuthenticated: (state) => {
+      state.id = "";
+      state.name = "";
+      state.username = "";
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { authenticate } = userSlice.actions;
+export const { authenticated, notAuthenticated } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

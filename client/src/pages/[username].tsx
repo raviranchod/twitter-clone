@@ -15,10 +15,10 @@ import { Text } from "../features/Text";
 import { Tweet } from "../features/Tweet";
 
 import { useGetUserByUsernameQuery } from "../generated/graphql";
-import { useUser } from "../libs/useUser";
+import { usePrivateRoute } from "../libs/usePrivateRoute";
 
 const Profile = () => {
-  const { isLoading } = useUser();
+  const { user: authorisedUser, isLoading } = usePrivateRoute();
 
   const router = useRouter();
   const username = router.query.username as string;
@@ -27,9 +27,9 @@ const Profile = () => {
     variables: { username },
   });
 
-  const { data, fetching, error } = userByUsername;
+  const { data, fetching } = userByUsername;
 
-  if (isLoading && !username && !userByUsername) {
+  if (isLoading || !authorisedUser || fetching || !data) {
     return <LoadingScreen />;
   }
 

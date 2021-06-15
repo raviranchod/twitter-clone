@@ -2,16 +2,19 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 
-import { useAuthoriseQuery } from "../../generated/graphql";
-import { authenticate } from "./slice";
+import { useAuthoriseQuery } from "../generated/graphql";
+import { authenticated } from "../slices/userSlice";
 
-const useUser = () => {
+const usePrivateRoute = () => {
   const router = useRouter();
+
   const dispatch = useDispatch();
+
   const [user] = useAuthoriseQuery();
 
   const authorisedUser = user.data?.authorise.user;
   const error = user.error || user.data?.authorise.error;
+  const isLoading = !authorisedUser && !error;
 
   useEffect(() => {
     if (!user) return;
@@ -19,22 +22,26 @@ const useUser = () => {
     // If an authorised user is found, dispatch it's values to redux
     if (authorisedUser) {
       dispatch(
-        authenticate({
+        authenticated({
           id: authorisedUser.id,
           name: authorisedUser.name,
           username: authorisedUser.username,
         })
       );
+      return;
     }
 
     // If there is an error and no user has been found, redirect the user to
     // the login page
     if (!authorisedUser && error) {
       router.push("/login");
+      return;
     }
-  }, [user]);
 
-  return { user: authorisedUser, isLoading: !authorisedUser };
+    return;
+  }, [authorisedUser, error]);
+
+  return { user: authorisedUser, isLoading };
 };
 
-export { useUser };
+export { usePrivateRoute };

@@ -4,12 +4,12 @@ import { Head } from "../features/Head";
 import { LoadingScreen } from "../screens/LoadingScreen";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 
-import { useUser } from "../libs/useUser";
+import { usePrivateRoute } from "../libs/usePrivateRoute";
 
 const Home = () => {
-  const { isLoading } = useUser();
+  const { user, isLoading } = usePrivateRoute();
 
-  if (isLoading) {
+  if (isLoading || !user) {
     return <LoadingScreen />;
   }
 
