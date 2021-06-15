@@ -1,10 +1,19 @@
 import { Button } from "../features/Button";
 import { Heading } from "../features/Heading";
 import { Head } from "../features/Head";
+import { LoadingScreen } from "../screens/LoadingScreen";
 import { PanelLayout } from "../layouts/PanelLayout";
 import { Text } from "../features/Text";
 
+import { usePublicRoute } from "../libs/usePublicRoute";
+
 const Landing = () => {
+  const { user, isLoading } = usePublicRoute();
+
+  if (isLoading || user) {
+    return <LoadingScreen />;
+  }
+
   return (
     <>
       <Head title="Twitter. It's what's happening" />

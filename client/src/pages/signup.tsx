@@ -6,12 +6,20 @@ import { Head } from "../features/Head";
 import { Heading } from "../features/Heading";
 import { Input } from "../features/Input";
 import { Link } from "../features/Link";
+import { LoadingScreen } from "../screens/LoadingScreen";
 import { Text } from "../features/Text";
 import { PanelLayout } from "../layouts/PanelLayout";
 
 import { useSignupMutation, SignupDto } from "../generated/graphql";
+import { usePublicRoute } from "../libs/usePublicRoute";
 
 const Signup = () => {
+  const { user, isLoading } = usePublicRoute();
+
+  if (isLoading || user) {
+    return <LoadingScreen />;
+  }
+
   const [, signup] = useSignupMutation();
   const router = useRouter();
 

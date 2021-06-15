@@ -3,17 +3,25 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 import { Button } from "../features/Button";
+import { ErrorBubble } from "../features/ErrorBubble";
 import { Head } from "../features/Head";
 import { Heading } from "../features/Heading";
 import { Input } from "../features/Input";
 import { Link } from "../features/Link";
+import { LoadingScreen } from "../screens/LoadingScreen";
 import { PanelLayout } from "../layouts/PanelLayout";
 import { Text } from "../features/Text";
 
 import { useLoginMutation, LoginDto } from "../generated/graphql";
-import { ErrorBubble } from "../features/ErrorBubble";
+import { usePublicRoute } from "../libs/usePublicRoute";
 
 const Login = () => {
+  const { user, isLoading } = usePublicRoute();
+
+  if (isLoading || user) {
+    return <LoadingScreen />;
+  }
+
   const [, login] = useLoginMutation();
   const [formError, setFormError] = useState("");
   const router = useRouter();
