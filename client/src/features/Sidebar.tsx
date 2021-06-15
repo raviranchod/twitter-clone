@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { RootState } from "../redux/store";
 
-import { Link } from "../Link";
-import { Logo } from "../Logo";
-import { Navigation } from "../Navigation";
-import { ProfileImage } from "../ProfileImage";
+import { Link } from "./Link";
+import { Logo } from "./Logo";
+import { Navigation } from "./Navigation";
+import { ProfileImage } from "./ProfileImage";
 
 type SidebarProps = {
   className?: string;

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
-import { FormError } from "../FormError";
-import { FormLabel } from "../FormLabel";
-import { VisuallyHidden } from "../VisuallyHidden";
+import { FormError } from "./FormError";
+import { FormLabel } from "./FormLabel";
+import { VisuallyHidden } from "./VisuallyHidden";
 
 type InputProps = {
   className?: string;

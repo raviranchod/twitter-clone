@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-import ExploreSvg from "../../assets/explore.svg";
-import HomeSvg from "../../assets/home.svg";
-import { Link } from "../Link";
-import ProfileSvg from "../../assets/profile.svg";
-import { Text } from "../Text";
-import { VisuallyHidden } from "../VisuallyHidden";
+import ExploreSvg from "../assets/explore.svg";
+import HomeSvg from "../assets/home.svg";
+import { Link } from "./Link";
+import ProfileSvg from "../assets/profile.svg";
+import { Text } from "./Text";
+import { VisuallyHidden } from "./VisuallyHidden";
 
-import { RootState } from "../../redux/store";
-import { tailwindTheme } from "../../utils/tailwindTheme";
-import { useWindowSize } from "../../utils/useWindowSize";
+import { RootState } from "../redux/store";
+import { tailwindTheme } from "../utils/tailwindTheme";
+import { useWindowSize } from "../utils/useWindowSize";
 
 const Navigation = () => {
   const { windowSize } = useWindowSize();

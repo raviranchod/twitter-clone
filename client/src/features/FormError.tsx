@@ -1,4 +1,4 @@
-import { Text } from "../Text";
+import { Text } from "./Text";
 
 type FormErrorProps = {
   children: React.ReactNode;

@@ -3,7 +3,7 @@ type ErrorBubbleProps = {
   className?: string;
 };
 
-import { Text } from "../Text";
+import { Text } from "./Text";
 
 const ErrorBubble = ({ children, className }: ErrorBubbleProps) => (
   <div className={`bg-red rounded p-4 ${className}`}>

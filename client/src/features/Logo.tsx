@@ -1,4 +1,4 @@
-import LogoSvg from "../../assets/logo.svg";
+import LogoSvg from "../assets/logo.svg";
 
 type LogoProps = {
   className?: string;
