@@ -4,8 +4,13 @@ import { RootState } from "../redux/store";
 
 import { Link } from "./Link";
 import { Logo } from "./Logo";
-import { Navigation } from "./Navigation";
+import LogoutSvg from "../assets/logout.svg";
+import { Menu } from "./Menu";
+import MenuItem from "./MenuItem";
 import { ProfileImage } from "./ProfileImage";
+
+import { tailwindTheme } from "../utils/tailwindTheme";
+import { useWindowSize } from "../libs/useWindowSize";
 
 type SidebarProps = {
   className?: string;
@@ -14,26 +19,40 @@ type SidebarProps = {
 const Sidebar = ({ className }: SidebarProps) => {
   const router = useRouter();
   const username = useSelector((state: RootState) => state.user.username);
+
+  const { width } = useWindowSize();
+  const { theme } = tailwindTheme();
+  const largeBreakpoint = parseInt(theme.screens.lg);
+  const isDesktop = width! >= largeBreakpoint;
+
   return (
     <aside
-      className={`h-full w-16 lg:w-56 space-y-8 py-4 px-2 lg:py-8 ${className}`}
+      className={`flex flex-col justify-between h-full w-16 lg:w-56 py-4 px-2 lg:py-8 ${className}`}
     >
-      <div className="px-3 lg:px-4">
-        {router.asPath === "/home" ? (
-          <Link href={`/${username}`}>
-            <ProfileImage
-              src="https://picsum.photos/200/200"
-              alt="Image"
-              size="sm"
-            />
-          </Link>
-        ) : (
-          <Link href="/home">
-            <Logo size="sm" className="mx-auto lg:mx-0" />
-          </Link>
-        )}
+      <div className="space-y-8">
+        <div className="px-3 lg:px-4">
+          {router.asPath === "/home" ? (
+            <Link href={`/${username}`}>
+              <ProfileImage
+                src="https://picsum.photos/200/200"
+                alt="Image"
+                size="sm"
+              />
+            </Link>
+          ) : (
+            <Link href="/home">
+              <Logo size="sm" className="mx-auto lg:mx-0" />
+            </Link>
+          )}
+        </div>
+        <Menu isDesktop={isDesktop} />
       </div>
-      <Navigation />
+      <MenuItem
+        title="Logout"
+        href="/logout"
+        icon={LogoutSvg}
+        isDesktop={isDesktop}
+      />
     </aside>
   );
 };
