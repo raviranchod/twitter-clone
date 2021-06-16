@@ -10,6 +10,7 @@ import {
   LoginResponse,
   LoginFieldError,
   AuthoriseResponse,
+  LogoutResponse,
 } from './auth.types';
 
 @Resolver(() => User)
@@ -164,15 +165,15 @@ export class AuthResolver {
 
   @Query(() => AuthoriseResponse)
   async authorise(@Context() ctx): Promise<AuthoriseResponse> {
-    const id = ctx.request.session.get('user').id;
+    const sessionId = ctx.request.session.get('user').id;
 
-    if (!id) {
+    if (!sessionId) {
       return {
         error: 'Forbidden resource',
       };
     }
 
-    const user = await this.usersService.findOne(id);
+    const user = await this.usersService.findOne(sessionId);
 
     if (!user) {
       return {
@@ -181,5 +182,22 @@ export class AuthResolver {
     }
 
     return { user };
+  }
+
+  @Mutation(() => LogoutResponse)
+  async logout(@Context() ctx): Promise<LogoutResponse> {
+    const sessionId = ctx.request.session.get('user').id;
+
+    if (sessionId) {
+      await ctx.request.session.destroy();
+
+      return {
+        success: true,
+      };
+    }
+
+    return {
+      error: true,
+    };
   }
 }

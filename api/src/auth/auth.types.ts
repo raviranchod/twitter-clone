@@ -49,3 +49,12 @@ export class AuthoriseResponse {
   @Field(() => String, { nullable: true })
   error?: string;
 }
+
+@ObjectType()
+export class LogoutResponse {
+  @Field(() => Boolean, { nullable: true })
+  success?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  error?: true;
+}

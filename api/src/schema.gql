@@ -69,6 +69,11 @@ type AuthoriseResponse {
   error: String
 }
 
+type LogoutResponse {
+  success: Boolean
+  error: Boolean
+}
+
 type Query {
   userByUsername(user: GetUserByUsernameDto!): GetUserByUsernameResponse!
   authorise: AuthoriseResponse!
@@ -82,6 +87,7 @@ type Mutation {
   composeTweet(tweet: ComposeTweetDto!): ComposeTweetResponse!
   signup(user: SignupDto!): SignupResponse!
   login(user: LoginDto!): LoginResponse!
+  logout: LogoutResponse!
 }
 
 input ComposeTweetDto {
