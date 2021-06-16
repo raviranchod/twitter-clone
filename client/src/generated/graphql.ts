@@ -73,11 +73,18 @@ export type LoginResponse = {
   errors?: Maybe<Array<LoginFieldError>>;
 };
 
+export type LogoutResponse = {
+  __typename?: 'LogoutResponse';
+  success?: Maybe<Scalars['Boolean']>;
+  error?: Maybe<Scalars['Boolean']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   composeTweet: ComposeTweetResponse;
   signup: SignupResponse;
   login: LoginResponse;
+  logout: LogoutResponse;
 };
 
 
@@ -178,6 +185,17 @@ export type LoginMutation = (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'name' | 'email' | 'username'>
     )> }
+  ) }
+);
+
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & { logout: (
+    { __typename?: 'LogoutResponse' }
+    & Pick<LogoutResponse, 'success' | 'error'>
   ) }
 );
 
@@ -287,6 +305,18 @@ export const LoginDocument = gql`
 
 export function useLoginMutation() {
   return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);
+};
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout {
+    success
+    error
+  }
+}
+    `;
+
+export function useLogoutMutation() {
+  return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
 };
 export const SignupDocument = gql`
     mutation Signup($name: String!, $email: String!, $username: String!, $password: String!) {

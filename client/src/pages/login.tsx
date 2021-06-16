@@ -17,21 +17,19 @@ import { usePublicRoute } from "../libs/usePublicRoute";
 
 const Login = () => {
   const { user, isLoading } = usePublicRoute();
-
-  if (isLoading || user) {
-    return <LoadingScreen />;
-  }
-
   const [, login] = useLoginMutation();
   const [formError, setFormError] = useState("");
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm<LoginDto>({ mode: "onSubmit", reValidateMode: "onSubmit" });
+
+  if (isLoading || user) {
+    return <LoadingScreen />;
+  }
 
   const handleOnSubmit = handleSubmit(async (data) => {
     setFormError("");

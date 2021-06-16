@@ -10,11 +10,15 @@ const usePrivateRoute = () => {
 
   const dispatch = useDispatch();
 
-  const [user] = useAuthoriseQuery();
+  const [user] = useAuthoriseQuery({
+    requestPolicy: "network-only",
+  });
 
   const authorisedUser = user.data?.authorise.user;
   const error = user.error || user.data?.authorise.error;
   const isLoading = !authorisedUser && !error;
+
+  console.log("private", user);
 
   useEffect(() => {
     if (!user) return;

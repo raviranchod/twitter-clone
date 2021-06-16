@@ -15,20 +15,18 @@ import { usePublicRoute } from "../libs/usePublicRoute";
 
 const Signup = () => {
   const { user, isLoading } = usePublicRoute();
-
-  if (isLoading || user) {
-    return <LoadingScreen />;
-  }
-
   const [, signup] = useSignupMutation();
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
   } = useForm<SignupDto>({ mode: "onSubmit", reValidateMode: "onSubmit" });
+
+  if (isLoading || user) {
+    return <LoadingScreen />;
+  }
 
   const handleOnSubmit = handleSubmit(async (data) => {
     const response = await signup(data);
