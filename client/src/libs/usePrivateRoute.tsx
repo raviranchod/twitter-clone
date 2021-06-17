@@ -18,8 +18,6 @@ const usePrivateRoute = () => {
   const error = user.error || user.data?.authorise.error;
   const isLoading = !authorisedUser && !error;
 
-  console.log("private", user);
-
   useEffect(() => {
     if (!user) return;
 

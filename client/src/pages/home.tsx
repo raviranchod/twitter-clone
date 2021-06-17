@@ -1,8 +1,9 @@
 import { ComposeTweet } from "../features/ComposeTweet";
 import { Container } from "../features/Container";
+import { DashboardLayout } from "../layouts/DashboardLayout";
 import { Head } from "../features/Head";
 import { LoadingScreen } from "../screens/LoadingScreen";
-import { DashboardLayout } from "../layouts/DashboardLayout";
+import { Panel } from "../features/Panel";
 
 import { usePrivateRoute } from "../libs/usePrivateRoute";
 
@@ -17,12 +18,12 @@ const Home = () => {
     <DashboardLayout>
       <Head title="Home" />
       <Container>
-        <div className="mt-12">
-          <ComposeTweet
-            profileImageSrc="https://picsum.photos/200/200"
-            profileImageAlt="Image"
-          />
-        </div>
+        <ComposeTweet
+          profileImageSrc="https://picsum.photos/200/200"
+          profileImageAlt="Image"
+          className="my-12"
+        />
+        <Panel className="divide-y-2 divide-primary-lightest">sdf</Panel>
       </Container>
     </DashboardLayout>
   );

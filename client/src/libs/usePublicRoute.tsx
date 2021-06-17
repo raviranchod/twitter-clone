@@ -16,8 +16,6 @@ const usePublicRoute = () => {
   const error = user.error || user.data?.authorise.error;
   const isLoading = !authorisedUser && !error;
 
-  console.log("public", user);
-
   useEffect(() => {
     if (!user) return;
 

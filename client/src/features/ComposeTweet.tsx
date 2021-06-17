@@ -26,27 +26,29 @@ const ComposeTweet = ({
 
   const userId = useSelector((state: RootState) => state.user.id);
 
-  const { register, handleSubmit, setValue } = useForm<
+  const { register, handleSubmit, setValue, reset } = useForm<
     Pick<ComposeTweetDto, "tweet">
   >({
     mode: "onSubmit",
   });
 
-  const handleComposeChange = (event: ChangeEvent<HTMLDivElement>) => {
-    setLength(event.target.textContent?.length ?? 0);
+  function handleComposeChange(event: ChangeEvent<HTMLDivElement>) {
+    setLength(event.target.textContent?.length || 0);
 
     event.currentTarget.textContent &&
       setValue("tweet", event.currentTarget.textContent, {
         shouldValidate: true,
       });
-  };
+  }
 
   useEffect(() => {
-    register("tweet");
+    register("tweet", { required: true, maxLength: 75 });
   }, [register]);
 
   const handleOnSubmit = handleSubmit(async ({ tweet }) => {
     await composeTweet({ userId, tweet });
+
+    if (composeRef.current) composeRef.current.textContent = "";
   });
 
   return (

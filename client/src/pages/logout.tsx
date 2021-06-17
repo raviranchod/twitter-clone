@@ -14,8 +14,6 @@ const Logout = () => {
     async function handleLogout() {
       const response = await logout();
 
-      console.log("logout", response);
-
       if (response.data?.logout.success) {
         return router.push("/login");
       }
@@ -28,6 +26,7 @@ const Logout = () => {
     return <LoadingScreen />;
   }
 
+  // TODO: Handle error
   return <LoadingScreen />;
 };
 
