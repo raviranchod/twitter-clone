@@ -1,9 +1,9 @@
-import { ComposeTweet } from "../features/ComposeTweet";
-import { Container } from "../features/Container";
+import { ComposeTweet } from "../components/ComposeTweet";
+import { Container } from "../components/Container";
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { Head } from "../features/Head";
+import { Head } from "../components/Head";
 import { LoadingScreen } from "../screens/LoadingScreen";
-import { Panel } from "../features/Panel";
+import { Panel } from "../components/Panel";
 
 import { usePrivateRoute } from "../libs/usePrivateRoute";
 

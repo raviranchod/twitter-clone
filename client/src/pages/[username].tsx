@@ -1,18 +1,18 @@
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { Container } from "../features/Container";
+import { Container } from "../components/Container";
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { Head } from "../features/Head";
-import { HeaderImage } from "../features/HeaderImage";
+import { Head } from "../components/Head";
+import { HeaderImage } from "../components/HeaderImage";
 import { LoadingScreen } from "../screens/LoadingScreen";
-import { Logo } from "../features/Logo";
-import { Panel } from "../features/Panel";
-import { ProfileImage } from "../features/ProfileImage";
+import { Logo } from "../components/Logo";
+import { Panel } from "../components/Panel";
+import { ProfileImage } from "../components/ProfileImage";
 import SpinnerSvg from "../assets/spinner.svg";
-import { Text } from "../features/Text";
+import { Text } from "../components/Text";
 
-import { Tweet } from "../features/Tweet";
+import { Tweet } from "../components/Tweet";
 
 import { useGetUserByUsernameQuery } from "../generated/graphql";
 import { usePrivateRoute } from "../libs/usePrivateRoute";

@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import { Button } from "../features/Button";
-import { ErrorBubble } from "../features/ErrorBubble";
-import { Head } from "../features/Head";
-import { Heading } from "../features/Heading";
-import { Input } from "../features/Input";
-import { Link } from "../features/Link";
+import { Button } from "../components/Button";
+import { ErrorBubble } from "../components/ErrorBubble";
+import { Head } from "../components/Head";
+import { Heading } from "../components/Heading";
+import { Input } from "../components/Input";
+import { Link } from "../components/Link";
 import { LoadingScreen } from "../screens/LoadingScreen";
 import { PanelLayout } from "../layouts/PanelLayout";
-import { Text } from "../features/Text";
+import { Text } from "../components/Text";
 
 import { useLoginMutation, LoginDto } from "../generated/graphql";
 import { usePublicRoute } from "../libs/usePublicRoute";

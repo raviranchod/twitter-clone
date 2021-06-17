@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import { Button } from "../features/Button";
-import { Head } from "../features/Head";
-import { Heading } from "../features/Heading";
-import { Input } from "../features/Input";
-import { Link } from "../features/Link";
+import { Button } from "../components/Button";
+import { Head } from "../components/Head";
+import { Heading } from "../components/Heading";
+import { Input } from "../components/Input";
+import { Link } from "../components/Link";
 import { LoadingScreen } from "../screens/LoadingScreen";
-import { Text } from "../features/Text";
+import { Text } from "../components/Text";
 import { PanelLayout } from "../layouts/PanelLayout";
 
 import { useSignupMutation, SignupDto } from "../generated/graphql";

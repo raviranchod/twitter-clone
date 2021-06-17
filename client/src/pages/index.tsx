@@ -1,9 +1,9 @@
-import { Button } from "../features/Button";
-import { Heading } from "../features/Heading";
-import { Head } from "../features/Head";
+import { Button } from "../components/Button";
+import { Heading } from "../components/Heading";
+import { Head } from "../components/Head";
 import { LoadingScreen } from "../screens/LoadingScreen";
 import { PanelLayout } from "../layouts/PanelLayout";
-import { Text } from "../features/Text";
+import { Text } from "../components/Text";
 
 import { usePublicRoute } from "../libs/usePublicRoute";
 

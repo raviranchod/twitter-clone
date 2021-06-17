@@ -1,6 +1,6 @@
-import { Link } from "../features/Link";
-import { Logo } from "../features/Logo";
-import { FormPanel } from "../features/FormPanel";
+import { Link } from "../components/Link";
+import { Logo } from "../components/Logo";
+import { FormPanel } from "../components/FormPanel";
 
 type PanelLayout = {
   children: React.ReactNode;
