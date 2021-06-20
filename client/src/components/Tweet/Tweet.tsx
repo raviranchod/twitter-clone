@@ -1,9 +1,9 @@
-import { LikeIcon } from "../icons/like";
-import { ProfileImage } from "./ProfileImage";
-import { ReplyIcon } from "../icons/reply";
-import { RetweetIcon } from "../icons/retweet";
-import { Text } from "./Text";
-import { Link } from "./Link";
+import { LikeIcon } from "../../icons/like";
+import { ProfileImage } from "../ProfileImage";
+import { ReplyIcon } from "../../icons/reply";
+import { RetweetIcon } from "../../icons/retweet";
+import { Text } from "../Text";
+import { Link } from "../Link";
 
 type TweetProps = {
   className?: string;

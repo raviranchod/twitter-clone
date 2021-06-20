@@ -2,12 +2,15 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
-import { Button } from "./Button";
-import { Panel } from "./Panel";
-import { ProfileImage } from "./ProfileImage";
+import { Button } from "../Button";
+import { Panel } from "../Panel";
+import { ProfileImage } from "../ProfileImage";
 
-import { ComposeTweetDto, useComposeTweetMutation } from "../generated/graphql";
-import { RootState } from "../redux/store";
+import {
+  ComposeTweetDto,
+  useComposeTweetMutation,
+} from "../../generated/graphql";
+import { RootState } from "../../redux/store";
 
 type ComposeTweetProps = {
   className?: string;

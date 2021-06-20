@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { RootState } from "../../redux/store";
 
-import { Link } from "./Link";
-import { Logo } from "./Logo";
-import { LogoutIcon } from "../icons/logout";
-import { Menu } from "./Menu";
-import MenuItem from "./MenuItem";
-import { ProfileImage } from "./ProfileImage";
+import { Link } from "../Link";
+import { Logo } from "../Logo";
+import { LogoutIcon } from "../../icons/logout";
+import { Menu } from "../Menu";
+import { MenuItem } from "../MenuItem";
+import { ProfileImage } from "../ProfileImage/ProfileImage";
 
-import { tailwindTheme } from "../utils/tailwindTheme";
-import { useWindowSize } from "../libs/useWindowSize";
+import { tailwindTheme } from "../../utils/tailwindTheme";
+import { useWindowSize } from "../../libs/useWindowSize";
 
 type SidebarProps = {
   className?: string;

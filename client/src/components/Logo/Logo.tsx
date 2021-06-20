@@ -1,4 +1,4 @@
-import { LogoIcon } from "../icons/logo";
+import { LogoIcon } from "../../icons/logo";
 
 type LogoProps = {
   className?: string;

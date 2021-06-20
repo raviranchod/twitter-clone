@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-import { ExploreIcon } from "../icons/explore";
-import { HomeIcon } from "../icons/home";
-import { ProfileIcon } from "../icons/profile";
+import { ExploreIcon } from "../../icons/explore";
+import { HomeIcon } from "../../icons/home";
+import { ProfileIcon } from "../../icons/profile";
 
-import { RootState } from "../redux/store";
-import MenuItem from "./MenuItem";
+import { RootState } from "../../redux/store";
+import { MenuItem } from "../MenuItem";
 
 type MenuProps = {
   isDesktop: boolean;

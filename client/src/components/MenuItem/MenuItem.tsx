@@ -1,6 +1,6 @@
-import { Link } from "./Link";
-import { Text } from "./Text";
-import { VisuallyHidden } from "./VisuallyHidden";
+import { Link } from "../Link";
+import { Text } from "../Text/Text";
+import { VisuallyHidden } from "../VisuallyHidden";
 
 type MenuItemIconProps = {
   className?: string;
@@ -41,4 +41,4 @@ const MenuItem = ({
   );
 };
 
-export default MenuItem;
+export { MenuItem };

@@ -8,11 +8,11 @@ import { HeaderImage } from "../components/HeaderImage";
 import { LoadingScreen } from "../screens/LoadingScreen";
 import { Logo } from "../components/Logo";
 import { Panel } from "../components/Panel";
-import { ProfileImage } from "../components/ProfileImage";
+import { ProfileImage } from "../components/ProfileImage/ProfileImage";
 import { SpinnerIcon } from "../icons/spinner";
-import { Text } from "../components/Text";
+import { Text } from "../components/Text/Text";
 
-import { Tweet } from "../components/Tweet";
+import { Tweet } from "../components/Tweet/Tweet";
 
 import { useGetUserByUsernameQuery } from "../generated/graphql";
 import { usePrivateRoute } from "../libs/usePrivateRoute";
