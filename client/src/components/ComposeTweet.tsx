@@ -52,16 +52,12 @@ const ComposeTweet = ({
   });
 
   return (
-    <Panel className={`flex space-x-2 ${className}`}>
-      <ProfileImage
-        src={profileImageSrc}
-        alt={profileImageAlt}
-        className="self-start"
-      />
+    <Panel className={`flex items-start space-x-2 ${className}`}>
+      <ProfileImage src={profileImageSrc} alt={profileImageAlt} />
 
       <div className="flex flex-col w-full relative">
         {!length && (
-          <div className="absolute text-xl text-grey">What's happening?</div>
+          <div className="absolute text-xl text-grey">{`What's happening?`}</div>
         )}
         <form onSubmit={handleOnSubmit} className="z-10">
           <div

@@ -1,4 +1,4 @@
-import LogoSvg from "../assets/logo.svg";
+import { LogoIcon } from "../icons/logo";
 
 type LogoProps = {
   className?: string;
@@ -13,7 +13,9 @@ const Logo = ({ className, size = "md", stroke = "primary" }: LogoProps) => {
     lg: "w-12",
   };
   return (
-    <LogoSvg className={`text-${stroke} ${sizeClassName[size]} ${className}`} />
+    <LogoIcon
+      className={`text-${stroke} ${sizeClassName[size]} ${className}`}
+    />
   );
 };
 

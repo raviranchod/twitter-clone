@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ProfileImageProps = {
   alt: string;
   className?: string;
@@ -11,17 +13,25 @@ const ProfileImage = ({
   src,
   size = "md",
 }: ProfileImageProps) => {
-  const sizeClassName = {
-    sm: "w-6 rounded-md",
-    md: "w-14 rounded-lg",
-    lg: "w-28 rounded-lg",
+  const classNames = {
+    sm: "rounded-md",
+    md: "rounded-lg",
+    lg: "rounded-lg",
+  };
+
+  const sizes = {
+    sm: 20,
+    md: 56,
+    lg: 112,
   };
 
   return (
-    <img
+    <Image
       src={src}
       alt={alt}
-      className={`${sizeClassName[size]} ${className}`}
+      height={sizes[size]}
+      width={sizes[size]}
+      className={`${classNames[size]} ${className}`}
     />
   );
 };

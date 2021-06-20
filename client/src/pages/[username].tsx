@@ -9,7 +9,7 @@ import { LoadingScreen } from "../screens/LoadingScreen";
 import { Logo } from "../components/Logo";
 import { Panel } from "../components/Panel";
 import { ProfileImage } from "../components/ProfileImage";
-import SpinnerSvg from "../assets/spinner.svg";
+import { SpinnerIcon } from "../icons/spinner";
 import { Text } from "../components/Text";
 
 import { Tweet } from "../components/Tweet";
@@ -57,10 +57,11 @@ const Profile = () => {
           padding={tweets?.tweets?.length ? "none" : "normal"}
         >
           {fetching ? (
-            <SpinnerSvg className="w-8 mx-auto text-current text-primary" />
+            <SpinnerIcon className="w-8 mx-auto text-current text-primary" />
           ) : tweets?.tweets?.length ? (
             tweets.tweets.map((tweet) => (
               <Tweet
+                key={`profile-tweets-${tweet.id}`}
                 createdAt={dayjs().to(dayjs(tweet.created_at))}
                 name={tweet.user.user?.name!}
                 username={tweet.user.user?.username!}
@@ -72,7 +73,7 @@ const Profile = () => {
           ) : (
             <div className="text-center">
               <Logo className="mx-auto mb-4" />
-              <Text>@{username} hasn't tweeted yet</Text>
+              <Text>{`@${username} hasn't tweeted yet`}</Text>
             </div>
           )}
         </Panel>

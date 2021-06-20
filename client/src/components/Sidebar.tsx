@@ -4,7 +4,7 @@ import { RootState } from "../redux/store";
 
 import { Link } from "./Link";
 import { Logo } from "./Logo";
-import LogoutSvg from "../assets/logout.svg";
+import { LogoutIcon } from "../icons/logout";
 import { Menu } from "./Menu";
 import MenuItem from "./MenuItem";
 import { ProfileImage } from "./ProfileImage";
@@ -50,7 +50,7 @@ const Sidebar = ({ className }: SidebarProps) => {
       <MenuItem
         title="Logout"
         href="/logout"
-        icon={LogoutSvg}
+        icon={LogoutIcon}
         isDesktop={isDesktop}
       />
     </aside>

@@ -1,7 +1,7 @@
-import LikeSvg from "../assets/like.svg";
+import { LikeIcon } from "../icons/like";
 import { ProfileImage } from "./ProfileImage";
-import ReplySvg from "../assets/reply.svg";
-import RetweetSvg from "../assets/retweet.svg";
+import { ReplyIcon } from "../icons/reply";
+import { RetweetIcon } from "../icons/retweet";
 import { Text } from "./Text";
 import { Link } from "./Link";
 
@@ -24,7 +24,7 @@ const Tweet = ({
   tweet,
   username,
 }: TweetProps) => (
-  <div className={`flex space-x-4 p-6 lg:p-8 ${className}`}>
+  <div className={`flex items-start space-x-4 p-6 lg:p-8 ${className}`}>
     <ProfileImage
       src={profileImageSrc}
       alt={profileImageAlt}
@@ -55,9 +55,9 @@ const Tweet = ({
       </div>
       <Text className="mb-4">{tweet}</Text>
       <div className="flex justify-between md:mr-16">
-        <ReplySvg className="w-6 text-current text-grey hover:text-primary-light transition-colors cursor-not-allowed" />
-        <RetweetSvg className="w-6 text-current text-grey hover:text-primary-light transition-colors cursor-not-allowed" />
-        <LikeSvg className="w-6 text-current text-grey hover:text-red transition-colors cursor-not-allowed" />
+        <ReplyIcon className="w-6 text-current text-grey hover:text-primary-light transition-colors cursor-not-allowed" />
+        <RetweetIcon className="w-6 text-current text-grey hover:text-primary-light transition-colors cursor-not-allowed" />
+        <LikeIcon className="w-6 text-current text-grey hover:text-red transition-colors cursor-not-allowed" />
       </div>
     </div>
   </div>

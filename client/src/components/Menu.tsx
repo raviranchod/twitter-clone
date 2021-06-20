@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
-import ExploreSvg from "../assets/explore.svg";
-import HomeSvg from "../assets/home.svg";
-import ProfileSvg from "../assets/profile.svg";
+import { ExploreIcon } from "../icons/explore";
+import { HomeIcon } from "../icons/home";
+import { ProfileIcon } from "../icons/profile";
 
 import { RootState } from "../redux/store";
 import MenuItem from "./MenuItem";
@@ -21,17 +21,17 @@ const Menu = ({ isDesktop }: MenuProps) => {
     {
       title: "Home",
       href: "/home",
-      icon: HomeSvg,
+      icon: HomeIcon,
     },
     {
       title: "Explore",
       href: "/explore",
-      icon: ExploreSvg,
+      icon: ExploreIcon,
     },
     {
       title: "Profile",
       href: `/${username}`,
-      icon: ProfileSvg,
+      icon: ProfileIcon,
     },
   ];
 

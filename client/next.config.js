@@ -1,13 +1,6 @@
 module.exports = {
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-      use: ["@svgr/webpack"],
-    });
-
-    return config;
+  images: {
+    // temporary solutation until the ability to upload a profile image/header image is supported
+    domains: ["picsum.photos"],
   },
 };
