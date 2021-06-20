@@ -1,6 +1,6 @@
 {
   "extends": "next",
-  "env" {
+  "env": {
     "jest": true
   }
 }
