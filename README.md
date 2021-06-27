@@ -16,7 +16,7 @@
   - `npm run dev`
   - App running on `http://localhost:3000`
 
-## Task list
+## Feature list
 
 - Authentication system (Login and Register)
 - Ability to compose a tweet
