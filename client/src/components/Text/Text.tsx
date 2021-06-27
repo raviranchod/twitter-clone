@@ -1,4 +1,4 @@
-type TextProps = {
+export type TextProps = {
   as?: "p" | "span";
   children: React.ReactNode;
   className?: string;

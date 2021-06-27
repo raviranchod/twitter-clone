@@ -1,7 +1,7 @@
 import React from "react";
 import NextLink from "next/link";
 
-type LinkProps = {
+export type LinkProps = {
   children: React.ReactNode;
   className?: string;
   href: string;

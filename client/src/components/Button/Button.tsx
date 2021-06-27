@@ -23,7 +23,7 @@ type LinkButtonProps = DefaultButtonProps & {
   type?: never;
 };
 
-type ButtonProps = EventButtonProps | LinkButtonProps;
+export type ButtonProps = EventButtonProps | LinkButtonProps;
 
 const Button = ({
   children,

@@ -41,23 +41,23 @@ const Profile = () => {
       <Head title={`ravi(@${username})`} />
       <HeaderImage />
       <Container>
-        <div className="px-4 lg:px-8 mb-12">
-          <div className="relative bg-primary-lightest right-2 -mt-14 p-2 inline-block rounded-lg">
+        <div className='px-4 lg:px-8 mb-12'>
+          <div className='relative bg-primary-lightest right-2 -mt-14 p-2 inline-block rounded-lg'>
             <ProfileImage
-              src="https://picsum.photos/200/200"
-              alt="Image"
-              size="lg"
+              src='https://picsum.photos/200/200'
+              alt='Image'
+              size='lg'
             />
           </div>
-          <Text className="text-lg font-bold mt-4">{user?.name}</Text>
-          <Text className="text-grey">@{user?.username}</Text>
+          <Text className='text-lg font-bold mt-4'>{user?.name}</Text>
+          <Text className='text-grey'>@{user?.username}</Text>
         </div>
         <Panel
-          className="divide-y-2 divide-primary-lightest"
+          className='divide-y-2 divide-primary-lightest'
           padding={tweets?.tweets?.length ? "none" : "normal"}
         >
           {fetching ? (
-            <SpinnerIcon className="w-8 mx-auto text-current text-primary" />
+            <SpinnerIcon className='w-8 mx-auto text-current text-primary' />
           ) : tweets?.tweets?.length ? (
             tweets.tweets.map((tweet) => (
               <Tweet
@@ -66,13 +66,12 @@ const Profile = () => {
                 name={tweet.user.user?.name!}
                 username={tweet.user.user?.username!}
                 tweet={tweet.tweet}
-                profileImageSrc="https://picsum.photos/200/200"
-                profileImageAlt={`${tweet.user.user?.username!} profile image`}
+                profileImageUrl='https://picsum.photos/200/200'
               />
             ))
           ) : (
-            <div className="text-center">
-              <Logo className="mx-auto mb-4" />
+            <div className='text-center'>
+              <Logo className='mx-auto mb-4' />
               <Text>{`@${username} hasn't tweeted yet`}</Text>
             </div>
           )}
